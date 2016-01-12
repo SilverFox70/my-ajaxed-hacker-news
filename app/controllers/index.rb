@@ -14,17 +14,16 @@ get '/posts/:id/vote' do
 end
 
 delete '/posts/:id' do
-  # write logic for deleting posts here.
   post = Post.find(params[:id])
   post.destroy
   {post_number: params[:id]}.to_json
 end
 
 post '/posts' do
-  Post.create( title: params[:title],
+  @new_post = Post.create( title: params[:title],
                username: Faker::Internet.user_name,
                comment_count: rand(1000) )
-  redirect '/posts'
+  erb :_article, layout: false
 end
 
 get '/post/:id' do

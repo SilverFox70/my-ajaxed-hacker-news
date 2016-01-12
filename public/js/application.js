@@ -11,13 +11,14 @@ $(document).ready(function() {
 var bindListeners = function(){
   voteListener();
   deleteListener();
+  createPostListener();
 };
 
 var voteListener = function(){
   $('article a.vote-button').click(function(e){
     e.preventDefault();
     console.log("Got vote button click.")
-    this_path = createPath(this);
+    var this_path = $(this).attr('href');
     upVote(this_path);
   });
 };
@@ -25,19 +26,41 @@ var voteListener = function(){
 var deleteListener = function(){
   $('article a.delete').click(function(e){
     e.preventDefault();
-    console.log("Got delete button click.");
-    this_path = createPath(this);
+    var this_path = $(this).attr('href');
+    console.log("Got delete button click. data: " + this_path);
     deletePost(this_path);
   });
 };
 
-var createPath = function (full_path){
-  var str = String(full_path);
-  var this_path = str.replace("http://localhost:9393", "");
-  return this_path;
+var createPostListener = function(){
+  $('#posts').submit(function(e){
+    e.preventDefault();
+    var form_data = $(this).serialize();
+    console.log("form data: " + form_data);
+    createPost(form_data);
+  });
+};
+
+// This method is unnecessary if we use $(this).attr('href')
+// var createPath = function (full_path){
+//   var str = String(full_path);
+//   var this_path = str.replace("http://localhost:9393", "");
+//   return this_path;
+// };
+
+var createPost = function(form_data){
+  $.ajax({
+    method: "POST",
+    url:'/posts',
+    data: form_data
+  }).done(function(response){
+    console.log("Return from ajax post call: " + response);
+    $('.post_container').append(response);
+  });
 };
 
 var deletePost = function(path){
+  console.log("path: " + path);
   $.ajax({
     method: "DELETE",
     url: path,
