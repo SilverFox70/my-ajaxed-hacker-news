@@ -15,7 +15,7 @@ var bindListeners = function(){
 };
 
 var voteListener = function(){
-  $('article a.vote-button').click(function(e){
+  $('.post-container').on('click', 'article a.vote-button', function(e){
     e.preventDefault();
     console.log("Got vote button click.")
     var this_path = $(this).attr('href');
@@ -24,7 +24,7 @@ var voteListener = function(){
 };
 
 var deleteListener = function(){
-  $('article a.delete').click(function(e){
+  $('.post-container').on('click', 'article a.delete', function(e){
     e.preventDefault();
     var this_path = $(this).attr('href');
     console.log("Got delete button click. data: " + this_path);
