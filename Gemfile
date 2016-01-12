@@ -16,6 +16,8 @@ gem 'activerecord'
 
 gem 'rake'
 
+gem 'pry'
+
 gem 'shotgun'
 gem 'faker'
 

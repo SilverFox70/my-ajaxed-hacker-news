@@ -10,13 +10,21 @@ end
 get '/posts/:id/vote' do
   post = Post.find(params[:id])
   post.votes.create(value: 1)
-  return {points: post.points, post_number: params[:id]}.to_json
+  if request.xhr?
+    {points: post.points, post_number: params[:id]}.to_json
+  else
+    redirect '/posts'
+  end
 end
 
 delete '/posts/:id' do
   post = Post.find(params[:id])
   post.destroy
-  {post_number: params[:id]}.to_json
+  if request.xhr?
+    {post_number: params[:id]}.to_json
+  else
+    redirect '/posts'
+  end
 end
 
 post '/posts' do
