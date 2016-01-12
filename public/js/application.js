@@ -52,10 +52,10 @@ var createPost = function(form_data){
   $.ajax({
     method: "POST",
     url:'/posts',
-    data: form_data
+    data: form_data,
   }).done(function(response){
     console.log("Return from ajax post call: " + response);
-    $('.post_container').append(response);
+    $(".post-container").append(response);
   });
 };
 

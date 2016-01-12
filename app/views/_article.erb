@@ -1,5 +1,5 @@
 <article id="<%=@new_post.id%>" >
-  ::before
+  <!-- ::before -->
   <a href="/posts/<%=@new_post.id%>/vote" class="fa fa-sort-desc vote-button">
   </a>
   <h2>
@@ -9,21 +9,22 @@
   <p>
     <span class="points">
       <%=@new_post.points%>
-      ::after
+      <!-- ::after -->
     </span>
     <span class="username">
-      ::before
+      <!-- ::before -->
       <%=@new_post.username%>
     </span>
     <span class="timestamp">
       <%=@new_post.time_since_creation%>
-      ::after
+      <!-- ::after -->
     </span>
     <span class="comment-count">
       <%=@new_post.comment_count%>
-      ::after
+      <!-- ::after -->
     </span>
     <a class="delete" href="/posts/<%=@new_post.id%>">
-      ::before
+      <!-- ::before -->
     </a>
   </p>
+</article>
